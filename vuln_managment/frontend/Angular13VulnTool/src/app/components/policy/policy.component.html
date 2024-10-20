@@ -1,0 +1,72 @@
+<div *ngIf="viewMode; else editable">
+    <div *ngIf="currentPolicy.policyid">
+      <h4>Policy</h4>
+      <div>
+        <label><strong>ID:</strong></label> {{ currentPolicy.policyid }}
+      </div>
+  
+      <a
+        class="badge badge-warning"
+        routerLink="/policy/{{ currentPolicy.policyid }}"
+      >
+        Edit
+      </a>
+    </div>
+  
+    <div *ngIf="!currentPolicy">
+      <br />
+      <p>Please click on a Policy...</p>
+    </div>
+  </div>
+  
+  <ng-template #editable>
+    <div *ngIf="currentPolicy.policyid" class="edit-form">
+      <h4>Policy</h4>
+      <form>
+        <div class="form-group">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label for="slahours">Category</mat-label>
+          <input matInput
+            type="text"
+            class="form-control"
+            id="cat"
+            required
+            [(ngModel)]="currentPolicy.category"
+            name="cat"
+          ></mat-form-field>
+        </div>
+        <div class="form-group"><mat-form-field appearance="fill">
+          <mat-label>Confidentiality Requirement</mat-label>
+          <mat-select [value]="currentPolicy.confidentialityreq"[(ngModel)]="currentPolicy.confidentialityreq" name="confidentialityreq" placeholder="Select an option">        
+            <mat-option *ngFor="let require of req" [value]= "require.value"> {{ require.viewValue }} </mat-option>
+        </mat-select></mat-form-field>
+        </div>
+        <div class="form-group"><mat-form-field appearance="fill">
+          <mat-label>Integrity Requirement</mat-label>
+          <mat-select [value]="currentPolicy.integrityreq"[(ngModel)]="currentPolicy.integrityreq" name="integrityreq" placeholder="Select an option">        
+            <mat-option *ngFor="let require of req" [value]= "require.value"> {{ require.viewValue }} </mat-option>
+        </mat-select></mat-form-field>
+        </div>
+          <div class="form-group"><mat-form-field appearance="fill">
+            <mat-label>Availability Requirement</mat-label>
+            <mat-select [value]="currentPolicy.availabilityreq"[(ngModel)]="currentPolicy.availabilityreq" name="availabilityreq" placeholder="Select an option">        
+              <mat-option *ngFor="let require of req" [value]= "require.value"> {{ require.viewValue }} </mat-option>
+          </mat-select></mat-form-field>
+          </div>
+        </form>
+  
+        <button mat-raised-button id="pol-submit-button"
+          type="submit"
+          (click)="updatePolicy()"
+        >
+          Save
+        </button>
+        <button mat-raised-button id="pol-cancel-button" (click)="closePolicy()">Go back</button>
+        <p>{{ message }}</p>
+      </div>
+    
+      <div *ngIf="!currentPolicy.policyid">
+        <br />
+        <p>Cannot access this Policy...</p>
+      </div>
+    </ng-template>

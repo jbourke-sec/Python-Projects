@@ -1,0 +1,68 @@
+<div>
+    <div class="submit-form">
+      <div *ngIf="!submitted">
+        <div class="form-group">
+          <label for="category">Category</label>
+          <input
+            type="text"
+            class="form-control"
+            id="category"
+            required
+            [(ngModel)]="playbook.category"
+            name="category"
+          />
+        </div>
+  
+        <div class="form-group">
+          <label for="val">Patch Validation</label>
+          <input
+            class="form-control"
+            id="val"
+            required
+            [(ngModel)]="playbook.patchvalidation"
+            name="val"
+          />
+        </div>
+        
+        <div class="form-group">
+            <label for="ver">Verification</label>
+            <input
+              type="text"
+              class="form-control"
+              id="ver"
+              required
+              [(ngModel)]="playbook.verification"
+              name="ver"
+            />
+          </div>
+    
+          <div class="form-group">
+            <label for="rol">Rollout</label>
+            <input
+              class="form-control"
+              id="rol"
+              required
+              [(ngModel)]="playbook.rollout"
+              name="rol"
+            />
+          </div>
+          <div class="form-group">
+            <label for="notes">Notes</label>
+            <input
+              type="text"
+              class="form-control"
+              id="notes"
+              required
+              [(ngModel)]="playbook.notes"
+              name="notes"
+            />
+          </div>
+        <button (click)="savePlay()" class="btn btn-success">Create Playbook</button>
+      </div>
+  
+      <div *ngIf="submitted">
+        <h4>Playbook was created successfully!</h4>
+        <button class="btn btn-success" (click)="newPlay()">Add</button>
+      </div>
+    </div>
+  </div>

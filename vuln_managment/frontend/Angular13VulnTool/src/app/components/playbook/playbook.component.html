@@ -1,0 +1,99 @@
+<div *ngIf="viewMode; else editable">
+    <div *ngIf="currentPlay.playbookid">
+      <h4>Playbook</h4>
+      <div>
+        <label><strong>ID:</strong></label> {{ currentPlay.playbookid }}
+      </div>
+  
+      <a
+        class="badge badge-warning"
+        routerLink="/playbook/{{ currentPlay.playbookid }}"
+      >
+        Edit
+      </a>
+    </div>
+  
+    <div *ngIf="!currentPlay">
+      <br />
+      <p>Please click on a Playbook...</p>
+    </div>
+  </div>
+  
+  <ng-template #editable>
+    <div *ngIf="currentPlay.playbookid" class="edit-form">
+      <h4>Playbook</h4>
+      <form>
+        <div class="form-group">
+          <label for="cat">Category</label>
+          <input
+            type="text"
+            class="form-control"
+            id="cat"
+            required
+            [(ngModel)]="currentPlay.category"
+            name="cat"
+          />
+        </div>
+  
+        <div class="form-group">
+          <label for="pat">Patch Validation</label>
+          <input
+            class="form-control"
+            id="pat"
+            required
+            [(ngModel)]="currentPlay.patchvalidation"
+            name="pat"
+          />
+        </div>
+        
+        <div class="form-group">
+            <label for="ver">Patch Verification</label>
+            <input
+              type="text"
+              class="form-control"
+              id="ver"
+              required
+              [(ngModel)]="currentPlay.verification"
+              name="sla"
+            />
+          </div>
+    
+          <div class="form-group">
+            <label for="rollout">Rollout</label>
+            <input
+              class="form-control"
+              id="rollout"
+              required
+              [(ngModel)]="currentPlay.rollout"
+              name="rollout"
+            />
+          </div>
+          <div class="form-group">
+            <label for="notes">Notes</label>
+            <input
+              type="text"
+              class="form-control"
+              id="notes"
+              required
+              [(ngModel)]="currentPlay.notes"
+              name="notes"
+            />
+          </div>
+    
+        </form>
+  
+        <button
+          type="submit"
+          (click)="updatePlay()"
+        >
+          Save
+        </button>
+        <button mat-raised-button id="play-cancel-button" (click)="closePlay()">Go back</button>
+        <p>{{ message }}</p>
+      </div>
+    
+      <div *ngIf="!currentPlay.playbookid">
+        <br />
+        <p>Cannot access this Playbook...</p>
+      </div>
+    </ng-template>

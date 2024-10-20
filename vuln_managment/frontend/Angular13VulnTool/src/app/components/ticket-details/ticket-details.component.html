@@ -1,0 +1,344 @@
+    <div *ngIf="currentTicket.ticketNumber" class="edit-form">
+      <mat-dialog-content>
+      <h3>INC#{{currentTicket.ticketNumber }}</h3>
+      <form>
+        <div class="row">
+          <div class="col-md-8">
+            <div class="pb-3">
+                <button mat-raised-button width="25%" (click)="sumPa()">
+                  Acquirement
+                </button>
+                <button mat-raised-button  width="25%" (click)="sumVa()">
+                  Validation
+                </button>
+                <button mat-raised-button  width="25%" (click)="sumVe()">
+                  Verification
+                </button>
+                <button mat-raised-button  width="25%" (click)="sumRo()">
+                  Rollout
+                </button>
+        <div class *ngIf='togglePa'>
+          <div class *ngIf='currentTicket.acquired == false; else acqcomp'>
+        <div class="form-group">
+          <textarea matInput
+            class="form-control"
+            id="summary"
+            [(ngModel)]="currentTicket.summary"
+            name="summary"
+          ></textarea>
+        </div></div>
+      <ng-template #acqcomp>
+        <div class="form-group">
+          <textarea matInput
+            class="form-control"
+            id="summary"
+            [(ngModel)]="currentTicket.summary"
+            name="summary"
+            disabled
+          ></textarea>
+        </div>
+      </ng-template>
+      </div>
+        <div class *ngIf='toggleVa'>
+          <div class *ngIf='currentTicket.acquired == true && currentTicket.verified == false && currentTicket.rolledout ==false && currentTicket.validated==false; else acqVa'>
+          <div class="form-group">
+            <textarea matInput
+              class="form-control"
+              id="summary"
+              [(ngModel)]="currentTicket.validatedsummary"
+              name="summary"
+              appearance="outline"
+            ></textarea>
+          </div></div>
+        <ng-template #acqVa>
+          <div class="form-group">
+            <textarea matInput
+              class="form-control"
+              id="summary"
+              [(ngModel)]="currentTicket.validatedsummary"
+              name="summary"
+              appearance="outline"
+              disabled
+            ></textarea>
+          </div>
+        </ng-template>
+        </div>
+          <div class *ngIf='toggleVe'>
+            <div class *ngIf='currentTicket.acquired == true && currentTicket.verified == false && currentTicket.rolledout ==false && currentTicket.validated== true; else acqVe'>
+            <div class="form-group">
+              <textarea matInput
+                class="form-control"
+                id="summary"
+                [(ngModel)]="currentTicket.verifiedsummary"
+                name="summary"
+                appearance="outline"
+              ></textarea>
+            </div></div>
+            <ng-template #acqVe>
+
+            <div class="form-group">
+              <textarea matInput
+                class="form-control"
+                id="summary"
+                [(ngModel)]="currentTicket.verifiedsummary"
+                name="summary"
+                appearance="outline"
+                disabled
+              ></textarea>
+            </div></ng-template>
+          </div>
+            <div class *ngIf='toggleRo'>
+              <div class *ngIf='currentTicket.acquired == true && currentTicket.verified == true && currentTicket.rolledout ==false && currentTicket.validated==true; else acqRo'>
+              <div class="form-group">
+                <textarea matInput
+                  class="form-control"
+                  id="summary"
+                  [(ngModel)]="currentTicket.rolledsummary"
+                  name="summary"
+                  appearance="outline"
+                ></textarea></div></div>
+                <ng-template #acqRo>
+                <div class="form-group">
+                  <textarea matInput
+                    class="form-control"
+                    id="summary"
+                    [(ngModel)]="currentTicket.rolledsummary"
+                    name="summary"
+                    appearance="outline"
+                    disabled
+                  ></textarea>
+                </div></ng-template>
+
+              </div>
+      </div>
+        <div class="row">
+          <div class="col-md-6">
+        <div class="form-group">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label for="prog">Progress</mat-label>
+          <input matInput
+            type="datetime"
+            class="form-control"
+            id="prog"
+            [(ngModel)]="currentTicket.progress"
+            name="prog"
+            disabled
+          ></mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <mat-form-field appearance="fill">
+            <mat-label>Assigned To</mat-label>
+        <mat-select [value]="currentTicket.assignedTo"[(ngModel)]="currentTicket.assignedTo" name="assignedTo">
+         
+          <mat-option *ngFor="let user of Users" [value]= "user"> {{ user }} </mat-option>
+          <div *ngIf="!currentTicket.assignedTo?.match('unassigned'); else nassigned"> <mat-option value= "unassigned"> unassigned </mat-option></div>
+        
+        <ng-template #nassigned><mat-option [value]="currentTicket.assignedTo">{{ currentTicket.assignedTo }}</mat-option></ng-template>
+      </mat-select></mat-form-field>
+    </div></div></div>
+    <div class="row">
+    <div class="col-md-6">
+      
+        <div class="form-group">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label for="group">Group</mat-label>
+          <input matInput
+            type="text"
+            class="form-control"
+            id="group"
+            [(ngModel)]="currentTicket.group"
+            name="group"
+            disabled
+          ></mat-form-field>
+        </div></div>
+        
+          <div class="col-md-6">
+        <div class="form-group">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label for="timeStarted">Time Started</mat-label>
+          <input matInput
+            type="text"
+            class="form-control"
+            id="timeStarted"
+            [(ngModel)]="currentTicket.timeStarted"
+            name="timeStarted"
+            disabled
+          ></mat-form-field>
+        </div></div></div>
+        <div class="row">
+        <div class="col-md-6">
+        <div class="form-group">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label for="cve">CVE</mat-label>
+          <input matInput
+            type="text"
+            class="form-control"
+            id="cve"
+            [(ngModel)]="currentTicket.cve"
+            name="cve"
+            disabled
+          ></mat-form-field>
+        </div></div>
+        
+        <div class="col-md-6">
+        <div class="form-group">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label for="cvss">Base CVSS</mat-label>
+          <input matInput
+            type="text"
+            class="form-control"
+            id="summary"
+            [(ngModel)]="currentTicket.cvss"
+            name="cvss"
+            disabled
+          ></mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+      <div class="form-group">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label for="environ">Environmental Score</mat-label>
+        <input matInput
+          type="text"
+          class="form-control"
+          id="environ"
+          [(ngModel)]="currentTicket.environmentalScore"
+          name="environ"
+          disabled
+        ></mat-form-field>
+      </div></div>
+      
+      <div class="col-md-6">
+      <div class="form-group">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label for="group">Temporal Score</mat-label>
+        <input matInput
+          type="text"
+          class="form-control"
+          id="temp"
+          [(ngModel)]="currentTicket.temporal"
+          name="temp"
+          disabled
+        ></mat-form-field>
+      </div>
+    </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+      <div class="form-group">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label for="impact">Impact Score</mat-label>
+        <input matInput
+          type="text"
+          class="form-control"
+          id="impact"
+          [(ngModel)]="currentTicket.impactScore"
+          name="impact"
+          disabled
+        ></mat-form-field>
+      </div></div>
+      
+      <div class="col-md-6">
+      <div class="form-group">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label for="exploit">Exploit Score</mat-label>
+        <input matInput
+          type="text"
+          class="form-control"
+          id="exploit"
+          [(ngModel)]="currentTicket.exploitScore"
+          name="exploit"
+          disabled
+        ></mat-form-field>
+      </div>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-4">
+        <div *ngIf="currentTicket.assets!.length != 0; else notfound">
+        <label>Assets</label>
+        <div class="asset-list" *ngFor="let asset of currentTicket.assets">
+          <mat-accordion>
+            <mat-expansion-panel hideToggle>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{ asset.hostname }}
+                </mat-panel-title>
+                <mat-panel-description>
+                  {{ asset.hostname }}
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              More Information
+              <button mat-icon-button aria-label="three dot icon"(click)="openAsset(asset.assetid)">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </div>
+      <ng-template #notfound>
+        <label>Assets</label>
+        <br>No assets found<br>
+      </ng-template>
+      <button mat-raised-button  (click)="openAssetAddition(this.currentTicket.assets!)">
+        Add Asset
+      </button>
+        <br><br>
+        <h3>Ticket Progress</h3>
+      <p><mat-checkbox [checked]="currentTicket.acquired!" disabled>Patch Acquired</mat-checkbox></p>
+      <p><mat-checkbox [checked]="currentTicket.validated!" disabled>Patch Validated</mat-checkbox></p>
+      <p><mat-checkbox [checked]="currentTicket.verified!" disabled>Patch Verified</mat-checkbox></p>
+      <p><mat-checkbox [checked]="currentTicket.rolledout!" disabled>Patch Rollout</mat-checkbox></p>
+      </div>
+      </div>
+      <div class = "row">
+        <div class="col-md-6">
+        <div class="form-group">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label for="exposure">Exposure</mat-label>
+          <textarea matInput
+            type="text"
+            class="form-control"
+            id="exposure"
+            [(ngModel)]="currentTicket.exposure"
+            name="exposure">
+          </textarea></mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label for="threat">Threat</mat-label>
+          <textarea matInput
+            type="text"
+            class="form-control"
+            id="threat"
+            [(ngModel)]="currentTicket.threat"
+            name="threat">
+        </textarea></mat-form-field>
+        </div></div></div>
+      </form>
+      
+      <button mat-raised-button
+        type="submit"
+        (click)="updateTicket()"
+      >
+        Save
+      </button>
+      <button mat-raised-button id="ticket-cancel-button" (click)="closeTicket()">Go back</button>
+      <button mat-raised-button id="ticket-cancel-button" (click)="stageCompleted()" *ngIf = "currentTicket.rolledout == false || currentTicket.rolledout == undefined">{{currentTicket.group}} Completed</button>
+      <button mat-raised-button id="ticket-close-button" (click)="closeTiket()" *ngIf = "currentTicket.timeClosed == '' || currentTicket.timeClosed == undefined || currentTicket.timeClosed == null">Close Ticket</button>
+      <p>{{ message }}</p>
+      </mat-dialog-content>
+    </div>
+    <div ></div>
+  
+    <div *ngIf="!currentTicket.ticketNumber">
+      <br />
+      <p>Cannot access this Ticket...</p>
+    </div>

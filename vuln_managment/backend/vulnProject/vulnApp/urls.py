@@ -1,0 +1,41 @@
+from django.conf.urls import url
+from . import views
+from .views import ListUsers, LoginAPIView, UserRetrieveUpdateAPIView
+
+urlpatterns = [
+    url(r'^api/auth/signin$', LoginAPIView.as_view()),
+    url(r'^api/validate$', UserRetrieveUpdateAPIView.as_view()),
+    url(r'^api/queue$', views.queue),
+    url(r'^api/mytickets$', views.getMyTickets),
+    url(r'^api/queue/closed$', views.getClosedTickets),
+    url(r'^api/queue/(?P<ticketnumber>[0-9]+)$', views.viewTicket),
+    url(r'^api/asset/(?P<assetId>[0-9]+)$', views.viewAsset),
+    url(r'^api/queue/group/((?P<string>[\w\-]+)/$)', views.getGroupTickets),
+    url(r'^api/asset/nopolicy$', views.assetListNoPolicy),
+    url(r'^api/asset$', views.assetList),
+    url(r'^api/vuln/(?P<vulnId>[0-9]+)$', views.viewVuln),
+    url(r'^api/vuln$', views.vulnList),
+    url(r'^api/vuln/unremediated$', views.unremediatedVuln),
+    url(r'^api/vuln/inprogress$', views.inProgressVuln),
+    url(r'^api/vuln/closed$', views.closedVuln),
+    url(r'^api/vuln/affected$', views.vulnAffectAssets),
+    url(r'^api/vuln/lastweek$', views.vulnlast7days),
+    url(r'^api/playbook/(?P<playbookId>[0-9]+)$', views.viewPlay),
+    url(r'^api/playbook$', views.playList),
+    url(r'^api/policy/(?P<policyId>[0-9]+)$', views.viewPolicy),
+    url(r'^api/policy$', views.policyList),
+    url(r'^api/users$', ListUsers.as_view()),
+    url(r'^api/closedresults/(?P<days>[0-9]+)$', views.returnClosedResults),
+    url(r'^api/vulnbysev$', views.affectVulnBySev),
+    url(r'^api/slastats/(?P<days>[0-9]+)$', views.metSLA),
+    url(r'^api/avgremtimes/(?P<days>[0-9]+)$', views.averageRemediationTimes),
+    url(r'^api/vulnsbyos/(?P<days>[0-9]+)$', views.vulnsByOs),
+    url(r'^api/vulnsbyapp/(?P<days>[0-9]+)$', views.vulnsByApp),
+    url(r'^api/vulnsbyhardware/(?P<days>[0-9]+)$', views.vulnsByHardware),
+    url(r'^api/assetbycpe$', views.assetCPEBreakdown),
+    url(r'^api/progbreakdown$', views.ticketsInProgBreakdown),
+    url(r'^api/vulnbreakdown$', views.vulnBreakdown),
+    url(r'^api/user/((?P<username>[\w\-]+)/$)', views.getUser),
+    url(r'^api/userslist$', views.userList),
+
+]

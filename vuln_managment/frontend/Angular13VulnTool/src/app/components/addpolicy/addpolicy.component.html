@@ -1,0 +1,41 @@
+<div>
+    <div class="submit-form">
+      <div *ngIf="!submitted">
+        <div class="form-group">
+          <label for="cat">Category</label>
+          <input
+            type="text"
+            class="form-control"
+            id="cat"
+            required
+            [(ngModel)]="policy.category"
+            name="cat"
+          />
+        </div>
+        <div class="form-group"><mat-form-field appearance="fill">
+          <mat-label>Confidentiality Requirement</mat-label>
+          <mat-select [value]="policy.confidentialityreq"[(ngModel)]="policy.confidentialityreq" name="confidentialityreq" required>        
+            <mat-option *ngFor="let require of req" [value]= "require.value"> {{ require.viewValue }} </mat-option>
+        </mat-select></mat-form-field>
+        </div>
+        <div class="form-group"><mat-form-field appearance="fill">
+          <mat-label>Integrity Requirement</mat-label>
+          <mat-select [value]="policy.integrityreq"[(ngModel)]="policy.integrityreq" name="integrityreq" required>        
+            <mat-option *ngFor="let require of req" [value]= "require.value"> {{ require.viewValue }} </mat-option>
+        </mat-select></mat-form-field>
+        </div>
+          <div class="form-group"><mat-form-field appearance="fill">
+            <mat-label>Availability Requirement</mat-label>
+            <mat-select [value]="policy.availabilityreq"[(ngModel)]="policy.availabilityreq" name="availabilityreq" required>        
+              <mat-option *ngFor="let require of req" [value]= "require.value"> {{ require.viewValue }} </mat-option>
+          </mat-select></mat-form-field>
+          </div>
+        <button (click)="savePolicy()" class="btn btn-success">Create Policy</button>
+      </div>
+  
+      <div *ngIf="submitted">
+        <h4>Policy was created successfully!</h4>
+        <button class="btn btn-success" (click)="newPolicy()">Add</button>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,24 @@
+
+<mat-card fxLayout="row" fxLayoutAlign="space-around center"><mat-card-title>
+  Remediation Outcomes - {{current}} Days
+</mat-card-title><mat-card-content>
+<ngx-charts-pie-grid
+  [results]="outcome"
+  [view]="[1000, 400]"
+  >
+</ngx-charts-pie-grid>
+</mat-card-content>
+<mat-card-actions>
+  <div class="form-group">
+    <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label for="cwe">Enter Days</mat-label>
+    <input matInput
+    type="number"
+    class="form-control"
+    id="setTime"
+  [(ngModel)]="days"
+  name="setTime"
+></mat-form-field><button mat-button (click)="setTime()">Submit</button>
+  </div>  
+  </mat-card-actions>
+</mat-card>

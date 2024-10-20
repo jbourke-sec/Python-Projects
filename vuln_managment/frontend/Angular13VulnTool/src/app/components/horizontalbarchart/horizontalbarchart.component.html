@@ -1,0 +1,34 @@
+<mat-card fxLayout="row" fxLayoutAlign="space-around center"><mat-card-title>
+        {{title}}
+    </mat-card-title><mat-card-content>
+        <ngx-charts-bar-horizontal
+            [results]="outcome"
+            [gradient]="gradient"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [legend]="showLegend"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel"
+            [barPadding]="1"
+            [view]="[1000, 400]"> 
+</ngx-charts-bar-horizontal>  
+</mat-card-content>
+    <mat-card-actions>
+        <button mat-button (click)="vulnByOs()">By Operating System</button>
+        <button mat-button (click)="vulnbyApp()">By Application</button>
+        <button mat-button (click)="vulnByHardware()">By Hardware</button>
+        <div class="form-group">
+            <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label for="cwe">Enter Days</mat-label>
+            <input matInput
+            type="text"
+            class="form-control"
+            id="setTime"
+          [(ngModel)]="days"
+          name="setTime"
+        ></mat-form-field><button mat-button (click)="updateTime()">Submit</button>
+          </div>    
+    </mat-card-actions>
+</mat-card>

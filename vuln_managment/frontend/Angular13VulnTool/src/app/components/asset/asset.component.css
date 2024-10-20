@@ -1,0 +1,17 @@
+table {
+    width: 100%;
+  }
+  body {
+    background-color: rgb(188, 192, 194);
+  } 
+  .table-hover > tbody > tr:hover {
+    background-color: #413e3e;
+}
+tr[ng-click] {
+    cursor: pointer;
+}
+
+mat-form-field {
+  width: 100%;
+  font-size:10px !important;
+}

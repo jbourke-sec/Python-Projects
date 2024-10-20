@@ -1,0 +1,10 @@
+<H1>Add Assets
+</H1>
+<mat-dialog-content>
+<div class="row" *ngFor = "let asset of assets">
+    <div class = "col-md-6">
+    <p><mat-checkbox [checked]="contains(asset)" (change)="onChange($event, asset)">{{ asset.assetid }}: {{ asset.hostname }}</mat-checkbox></p>
+</div></div>
+<button mat-raised-button  (click)="closeDialog()">
+    Close
+  </button></mat-dialog-content>

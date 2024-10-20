@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html >
+<style>
+table, th , td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(even) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+</style>
+<body>
+<div ng-app="Angular13VulnTool" ng-controller="">
+  
+<table>
+  <tr><td>Playbook ID</td><td>CPE</td><td>Category</td><td>Patch Validation</td><td>Verification</td><td>Rollout</td><td>Category</td></tr>
+   <tr class="list-playbooks"
+*ngFor="let playbook of playbooks;" >
+    <td><button mat-raised-button id="playbook-button" (click)="openPlay(playbook.playbookid)" >ID#{{ playbook.playbookid }}</button></td>
+    <td>{{ playbook.category }}</td>
+    <td>{{ playbook.patchvalidation }}</td>
+    <td>{{ playbook.verification }}</td>
+    <td>{{ playbook.rollout }}</td>
+    <td>{{ playbook.category }}</td>
+  </tr>
+</table>
+<button mat-raised-button id="newplay-button" (click)="newPlay()">New Policy</button>
+</div>
+</body>
+</html>

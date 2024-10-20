@@ -1,0 +1,70 @@
+    <div class="card card-container"><div class = 'centered'>
+      <form
+        *ngIf="!isLoggedIn"
+        name="form"
+        (ngSubmit)="f.form.valid && onSubmit()"
+        #f="ngForm"
+        novalidate
+      >
+        <div class="form-group">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label for="email">Email</mat-label>
+          <input matInput
+            type="text"
+            class="form-control"
+            name="email"
+            [(ngModel)]="form.email"
+            required
+            #username="ngModel"
+          ></mat-form-field>
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="username.errors && f.submitted"
+          >
+            Username is required!
+          </div>
+        </div>
+        <div class="form-group">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label for="password">Password</mat-label>
+          <input matInput
+            type="password"
+            class="form-control"
+            name="password"
+            [(ngModel)]="form.password"
+            required
+            minlength="8"
+            #password="ngModel"
+          ></mat-form-field>
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="password.errors && f.submitted"
+          >
+            <div *ngIf="password.errors['required']">Password is required</div>
+            <div *ngIf="password.errors['minlength']">
+              Password must be at least 8 characters
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary btn-block">
+            Login
+          </button>
+        </div>
+        <div class="form-group">
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="f.submitted && isLoginFailed"
+          >
+            Login failed: {{ errorMessage }}
+          </div>
+        </div>
+      </form>
+  
+      <div class="alert alert-success" *ngIf="isLoggedIn">
+        Logged in as {{ tokenStorage.getUser().email }} 
+      </div>
+    </div></div>

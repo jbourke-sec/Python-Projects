@@ -1,0 +1,68 @@
+<div>
+    <div class="submit-form">
+      <div *ngIf="!submitted">
+        <div class="form-group">
+          <div class *ngIf='!currentVuln.cve; else addvuln'>
+          <mat-label>CVE</mat-label>
+          <mat-select [(ngModel)]="ticket.cve" name="cve" placeholder="Select Vulnerability">
+            <mat-option *ngFor="let vuln of vulnerabilities" [value]= "vuln.cve"> {{ vuln.cve }} </mat-option>      
+        </mat-select></div>
+        <ng-template #addvuln>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label for="cvuln">CVE</mat-label>
+          <input matInput
+            input type="text" 
+            class="form-control"
+            id="cvuln"
+            disabled
+            [(ngModel)]="currentVuln.cve"
+            name="cvuln"
+          ></mat-form-field></ng-template>
+      </div>
+      <div class="form-group">
+        <mat-label>Assign Playbook</mat-label>
+        <mat-select [(ngModel)]="ticket.playbookid" name="playbookid" placeholder="Select Playbook">
+          <mat-option *ngFor="let play of playbooks" [value]= "play"> {{ play.category }} </mat-option>      
+      </mat-select>
+    </div>
+        <div class = "row">
+          <div class = "col-md-6">
+        <div class="form-group">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label for="hours">SLA Hours</mat-label>
+          <input matInput
+            input type="number" 
+            step="1" 
+            min="0"
+            class="form-control"
+            id="cvss"
+            required
+            [(ngModel)]="hours"
+            name="cvss"
+          ></mat-form-field>
+        </div></div>
+        <div class = "col-md-6">
+        <div class="form-group">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label for="minutes">SLA Minutes</mat-label>
+          <input matInput
+            class="form-control"
+            input type="number" 
+            step="1" 
+            max="59"
+            min="0"
+            id="cvss"
+            required
+            [(ngModel)]="minutes"
+            name="cvss"
+          ></mat-form-field>
+        </div></div></div>
+        <button (click)="saveTicket()" class="btn btn-success">Create Ticket</button>
+      </div>
+  
+      <div *ngIf="submitted">
+        <h4>Ticket was created successfully!</h4>
+        <button class="btn btn-success" (click)="newTicket()">Add</button>
+      </div>
+    </div>
+  </div>

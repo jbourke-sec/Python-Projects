@@ -1,0 +1,20 @@
+textarea:disabled{
+    background-color:rgb(115, 115, 115);
+}
+input:disabled{
+    background-color:rgb(115, 115, 115);
+}
+.mat-form-field{ 
+    width:100% !important;
+    font-size:10px !important;
+  }
+  .matInput{
+     width:100% !important;
+    font-size:10px !important; 
+  }
+  .mat-form-field-flex {
+    padding-top: 3px;
+  }
+  button{
+      font-size: 10px;
+  }

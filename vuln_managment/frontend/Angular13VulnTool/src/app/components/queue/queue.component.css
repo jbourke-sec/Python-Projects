@@ -1,0 +1,18 @@
+table {
+    width: 100%;
+  }
+  body {
+    background-color: rgb(188, 192, 194);
+  }
+  
+  .mat-raised-button{
+    height:32px !important;
+    width:12.5% !important;
+    font-size:10px !important;
+}  
+  .table-hover > tbody > tr:hover {
+    background-color: #413e3e;
+}
+tr[ng-click] {
+    cursor: pointer;
+}

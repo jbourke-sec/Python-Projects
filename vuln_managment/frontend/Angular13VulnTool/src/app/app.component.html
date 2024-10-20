@@ -1,0 +1,72 @@
+<div *ngIf ='this.username; else notlogged'><mat-toolbar color="primary" class="example-toolbar">
+  <h1 class="header1">Logged in as: {{ username }}</h1>
+</mat-toolbar>
+<nav class="navbar navbar-expand navbar-dark bg-dark" aria-label="Main Menu">
+      <div class="collapse navbar-collapse" id="main-navigation">
+           <a href="" class="navbar-brand">CVEGuard</a>
+           <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a routerLink="/queue" class="nav-link">Ticketing System</a>
+            </li> 
+            <li class="nav-item">
+              <div class="dropdown">
+                <a class="nav-link">Manage</a>
+                <div class="dropdown-content">
+                  <a routerLink="/assets" class="nav-link">Assets</a>
+                  <a routerLink="/vuln" class="nav-link">Vulnerabilities</a>
+                  <a routerLink="/policy" class="nav-link">Policies</a>
+                  <a routerLink="/playbook" class="nav-link">Playbooks</a>
+      
+                </div>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="dropdown">
+                <a class="nav-link">Dashboards</a>
+                <div class="dropdown-content">
+                  <a routerLink="/dashboard" class="nav-link">Ticket Metrics</a>
+                  <a routerLink="/vulndashboard" class="nav-link">Vulnerability Metrics</a>
+      
+                </div>
+              </div>
+            </li>
+          </ul>
+           <!-- Nav Right-->
+           
+          <ul class="navbar-nav justify-content-right"><div *ngIf="super">
+            <li class="nav-item mr-3">
+              
+                <a routerLink="/users" class="nav-link"><mat-icon>build</mat-icon></a>
+            </li></div>
+              <li class="nav-item mr-1">
+                <a href class="nav-link" (click)="logout()"><mat-icon>power_settings_new</mat-icon></a>
+              </li>
+          </ul>
+      </div>
+</nav>
+  </div>
+  <ng-template #notlogged>
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+      <a href="" class="navbar-brand">CVEGuard</a></nav>
+  </ng-template>
+  <div class = wrapper>
+  <div class="container mt-3">
+    <router-outlet></router-outlet>
+  </div>
+  <footer class="bg-dark text-center text-white"><div class="classfooter">
+    <div class="container p-2 pb-0">
+      <section class="mb-4">
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+          ><i class="bi bi-github"></i
+        ></a>
+        <a class="btn btn-outline-light btn-floating m-1" href="https://www.linkedin.com/in/jonathon-bourke-b917051ba/" role="button"
+          ><i class="bi bi-linkedin"></i></a>
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+          ><i class="bi bi-mailbox"></i></a>
+      </section>
+    </div></div>
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+       2022:
+      <a class="text-white" href="https://mdbootstrap.com/">CVEGuard</a>
+    </div>
+  </footer></div>

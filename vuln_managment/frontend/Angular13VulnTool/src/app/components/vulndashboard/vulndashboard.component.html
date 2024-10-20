@@ -1,0 +1,14 @@
+<mat-grid-list cols="1" rowHeight="2:1">
+    <mat-grid-tile colspan="1" rowspan="1"><mat-card fxLayout="row" fxLayoutAlign="space-around center"><mat-card-title>
+        Vulnerabilities affecting your Environment
+    </mat-card-title><mat-card-content><app-barchart></app-barchart></mat-card-content></mat-card></mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1"><app-horizontalbarchart></app-horizontalbarchart></mat-grid-tile>
+        <mat-grid-tile colspan="1" rowspan="1">
+            <mat-card fxLayout="row" fxLayoutAlign="space-around center"><mat-card-title>
+                Asset CPE Breakdown
+            </mat-card-title><mat-card-content><app-advancedpiechart></app-advancedpiechart></mat-card-content></mat-card></mat-grid-tile>
+            <mat-grid-tile colspan="1" rowspan="1">
+                <mat-card fxLayout="row" fxLayoutAlign="space-around center"><mat-card-title>
+                    Affected Vulnerabilities Vectors
+                </mat-card-title><mat-card-content><app-grouped-vertical-bar></app-grouped-vertical-bar></mat-card-content></mat-card></mat-grid-tile>
+    </mat-grid-list>

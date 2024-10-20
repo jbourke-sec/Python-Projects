@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <div ng-app="Angular13VulnTool" ng-controller="">
+    <div class="mat-elevation-z8">
+ <!--   <div *ngIf="all">Vulnerability Management Dashboard</div>
+    <div *ngIf="closed">Resolved Vulnerabilities</div>
+    <div *ngIf="unremediated">Unremediated Vulnerabilities</div>-->  
+    <mat-toolbar><span><h2>Policy Dashboard</h2></span></mat-toolbar>
+    <mat-form-field appearance="standard">
+      <mat-label>Search</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search Queue" #input>
+  </mat-form-field>
+  <!--<button mat-raised-button id="unvuln-button" (click)="retrieveUnremVulns()">Unremediated Vulnerabilities</button>
+  <button mat-raised-button id="unvuln-button" (click)="retrieveVulns()">All Vulnerabilities</button>
+  <button mat-raised-button id="unvuln-button" (click)="closedVulns()">Closed Vulnerabilities</button>
+  <button mat-raised-button id="newvuln-button" (click)="newVuln()">New Vulnerability</button>-->
+  <button mat-raised-button id="newpolicy-button" (click)="newPolicy()">New Policy</button>
+  <table class="table-hover" #dataTable mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+    <!-- COLUMN INFO -->
+     <!--ID Col -->
+      <ng-container matColumnDef="policyid">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by ID">ID</th>
+        <td mat-cell *matCellDef="let policy" (click)="openPolicy(policy.policyid)"> {{policy.policyid}} </td>
+      </ng-container>
+    
+      <!--Name Col -->
+      <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef>Category</th>
+        <td mat-cell *matCellDef="let policy"(click)="openPolicy(policy.policyid)">{{policy.category}} </td>
+      </ng-container>
+    <ng-container matColumnDef="confidentialityreq">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Requirement">Confidentiality Requirement</th>
+        <td mat-cell *matCellDef="let policy" (click)="openPolicy(policy.policyid)">{{policy.confidentialityreq}} </td>
+      </ng-container>
+      <ng-container matColumnDef="integrityreq">
+        <th mat-header-cell *matHeaderCellDef>Integrity Requirement</th>
+        <td mat-cell *matCellDef="let policy"(click)="openPolicy(policy.policyid)">{{policy.integrityreq}} </td>
+      </ng-container>
+      <ng-container matColumnDef="availabilityreq">
+        <th mat-header-cell *matHeaderCellDef>Availability Requirement</th>
+        <td mat-cell *matCellDef="let policy"(click)="openPolicy(policy.policyid)">{{policy.availabilityreq}} </td>
+      </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let rowData; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+  showFirstLastButtons 
+  aria-label="Select page">
+  </mat-paginator>
+    </div>
+  </div>
+</body>
+</html>

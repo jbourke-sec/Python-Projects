@@ -1,0 +1,31 @@
+.advanced-pie-legend .total-value {
+    font-size: 20px !important;
+  }
+  
+  .advanced-pie-legend .total-label {
+      font-size: 14px !important;
+      margin-bottom: 5px !important;
+      line-height: 1em !important;
+  }
+  
+  .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-value {
+      font-size: 14px !important;
+      margin-left: 11px;
+      line-height: 1em !important;
+      margin-top: 0px !important;
+  }
+  
+  .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-label {
+      font-size: 10px !important;
+      opacity: 0.7;
+      margin-left: 11px;
+      margin-top: 0px !important;
+      line-height: 1em !important;
+  }
+  
+  .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-percent {
+      font-size: 14px !important;
+      opacity: 0.7;
+      margin-left: 11px;
+      line-height: 1em !important;
+  }

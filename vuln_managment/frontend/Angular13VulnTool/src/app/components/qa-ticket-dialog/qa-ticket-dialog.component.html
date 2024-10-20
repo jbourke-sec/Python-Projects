@@ -1,0 +1,14 @@
+<div mat-dialog-content>
+    <mat-label>Quality Assurance</mat-label>
+    <div class="form-group">
+        <textarea matInput
+          class="form-control"
+          id="qa"
+          [(ngModel)]="currentTicket.qa"
+          name="qa"
+        ></textarea>
+      </div></div>
+    <div mat-dialog-actions>
+        <button mat-button (click)="onClick()">Confirm</button>
+        <button mat-button (click)="onNoClick()">Exit</button>
+      </div>

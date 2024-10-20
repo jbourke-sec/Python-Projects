@@ -1,0 +1,136 @@
+<div>
+  
+    <div class="submit-form">
+        <div *ngIf="!submitted"><h1>New Asset</h1>
+          <div class="row">
+            <div class="col-md-8">
+        <div class="form-group">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label for="cpe">OS CPE</mat-label>
+          <input matInput
+            type="text"
+            class="form-control"
+            id="cpe"
+            [(ngModel)]="asset.cpe"
+            name="cpe"
+          /></mat-form-field>
+        </div>
+        <div class="row">
+          <div class="col-md-8">
+        <div class="form-group"><mat-form-field appearance="fill">
+          <mat-label>Risk</mat-label>
+          <mat-select [value]="asset.risk"[(ngModel)]="asset.risk" name="risk" placeholder="Select an option">        
+            <mat-option *ngFor="let risks of risk" [value]= "risks.value"> {{ risks.viewValue }} </mat-option>
+        </mat-select></mat-form-field>
+      </div></div></div>
+          <div class = "row">
+            <div class = "col-md-4">
+          <div class="form-group">
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label for="slahours">SLA Hours</mat-label>
+            <input matInput
+              type="number" 
+              step="1" 
+              min="0"
+              class="form-control"
+              id="sla"
+              [(ngModel)]="hours"
+              name="sla"
+            ></mat-form-field>
+          </div></div>
+          <div class = "col-md-4">
+          <div class="form-group">
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label for="slamins">SLA Minutes</mat-label>
+            <input matInput
+              input type="number" 
+              step="1" 
+              max="59"
+              min="0"
+              class="form-control"
+              id="slamins"
+              [(ngModel)]="minutes"
+              name="slamins"
+            /></mat-form-field>
+          </div></div></div>
+          <div class="row">
+            <div class="col-md-8">
+          <div class="form-group">
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label for="host">Hostname</mat-label>
+            <input matInput
+              type="text"
+              class="form-control"
+              id="host"
+              [(ngModel)]="asset.hostname"
+              name="host"
+            ></mat-form-field>
+          </div></div></div>
+          <div class="row">
+            <div class="col-md-8">
+          <div class="form-group">
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label for="cpe">Category</mat-label>
+            <input matInput
+              type="text"
+              class="form-control"
+              id="category"
+              [(ngModel)]="asset.category"
+              name="category"
+            ></mat-form-field>
+          </div></div></div></div>
+          <div class="col-md-4">
+          <mat-accordion>
+            <mat-expansion-panel hideToggle>
+              <mat-expansion-panel-header (click)="viewTags()" >
+                <mat-panel-title>
+                  CPE URIs
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div *ngFor="let Tag of taglist;">
+                {{ Tag }}
+              <button mat-icon-button aria-label="deleteTag"(click)="removeTag(Tag)">
+                <mat-icon>delete</mat-icon>
+              </button></div>
+              <div class="form-group">
+                <label for="addtag">Add Vendor</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="addven"
+                  [(ngModel)]="vendor"
+                  name="addven"
+                />
+              </div>
+              <div class="form-group">
+                <label for="addtag">Add Product</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="addtec"
+                  [(ngModel)]="tech"
+                  name="addtec"
+                />
+              </div>
+              <button mat-raised-button
+            type="submit"
+            (click)="addTag(vendor, tech)"
+          >
+          Add URI
+          </button>
+            </mat-expansion-panel>
+          </mat-accordion>
+     </div>
+    </div> <button mat-raised-button
+        type="submit"
+        (click)="saveAsset()"
+      >
+        Save
+      </button>
+    
+</div>
+<div *ngIf="submitted">
+        <h4>Asset was created successfully!</h4>
+        <button class="btn btn-success" (click)="newAsset()">Add</button>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html >
+<body>
+<div ng-app="Angular13VulnTool" ng-controller="">
+  <div class *ngIf='loading; else loaded'><div class="center"><mat-spinner></mat-spinner></div></div>
+  <ng-template #loaded>
+  <div class="mat-elevation-z8">
+    <div *ngIf="all"><mat-toolbar><span><h2>Vulnerability Repository</h2></span></mat-toolbar></div>
+  <div *ngIf="closed"><mat-toolbar><span><h2>Mitigated Vulnerabilities</h2></span></mat-toolbar></div>
+  <div *ngIf="unremediated"><mat-toolbar><span><h2>Vulnerabilities - Present Weaknesses</h2></span></mat-toolbar></div>
+  <div *ngIf="lw"><mat-toolbar><span><h2>Vulnerabilities - Last Week</h2></span></mat-toolbar></div>
+  <div *ngIf="aff"><mat-toolbar><span><h2>Vulnerabilities with affected Assets</h2></span></mat-toolbar></div>
+  <mat-form-field appearance="standard">
+    <mat-label>Search</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Search Queue" #input>
+</mat-form-field>
+<div class ='row-center'>
+<button mat-raised-button id="unvuln-button" (click)="retrieveUnremVulns()">Vulnerabilities - Present Weaknesses </button>
+<button mat-raised-button id="unvuln-button" (click)="retrieveVulns()">Vulnerability Repository</button>
+<button mat-raised-button id="unvuln-button" (click)="closedVulns()">Mitigated Vulnerabilities</button>
+<button mat-raised-button id="unvuln-button" (click)="retrieveVulnsLastWeek()">New Vulnerabilities</button>
+<button mat-raised-button id="unvuln-button" (click)="retrieveVulnAffectAssets()">Detected Assets</button>
+<button mat-raised-button id="newvuln-button" (click)="newVuln()">New Vulnerability</button></div>
+<table class="table-hover" #dataTable mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+    <ng-container matColumnDef="cve">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Date">CVE</th>
+      <td mat-cell *matCellDef="let vuln" (click)="openVuln(vuln.vulnid)">{{vuln.cve}} </td>
+    </ng-container>
+    <ng-container matColumnDef="cpeVendor">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by SLA Time">CPE - Vendors</th>
+      <td mat-cell *matCellDef="let vuln"(click)="openVuln(vuln.vulnid)">{{cpeVendors(vuln.cpe, 3).slice(0,50)}} </td>
+    </ng-container>
+    <ng-container matColumnDef="cpeTech">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Tech">CPE - Technology</th>
+      <td mat-cell *matCellDef="let vuln"(click)="openVuln(vuln.vulnid)">{{cpeVendors(vuln.cpe, 4).slice(0,50)}} </td>
+    </ng-container>
+  <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef>Description</th>
+      <td mat-cell *matCellDef="let vuln"(click)="openVuln(vuln.vulnid)">{{vuln.description.slice(0,225)}}... </td>
+    </ng-container>
+    <ng-container matColumnDef="risk">
+      <th mat-header-cell *matHeaderCellDef>Risk</th>
+      <td mat-cell *matCellDef="let vuln"(click)="openVuln(vuln.vulnid)">{{vuln.risk}} </td>
+    </ng-container>
+    <div *ngIf="unremediated || aff || lw">
+      <ng-container matColumnDef="Create Ticket">
+        <th mat-header-cell *matHeaderCellDef>Create Ticket</th>
+        <td mat-cell *matCellDef="let vuln"><button mat-icon-button aria-label="three dot icon"(click)="createTicket(vuln.vulnid)">
+          <mat-icon>more_vert</mat-icon>
+        </button></td>
+      </ng-container>
+    </div>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let rowData; columns: displayedColumns;"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="[5, 10, 20]"
+showFirstLastButtons 
+aria-label="Select page">
+</mat-paginator>
+  </div>
+  </ng-template>
+</div>
+<div class = 'space'>
+</div>
+</body>
+</html>

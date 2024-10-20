@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html >
+<body>
+<div ng-app="Angular13VulnTool" ng-controller="">
+  <div class="mat-elevation-z8">
+
+    <div *ngIf="all"><mat-toolbar><span><h2>All Assets</h2></span></mat-toolbar></div>
+    <div *ngIf="noPolicy"><mat-toolbar><span><h2>Assets - No Policy</h2></span></mat-toolbar></div>
+    <mat-form-field appearance="standard">
+      <mat-label>Search</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search Queue" #input>
+  </mat-form-field>
+  <div class = 'row-center'>
+  <button mat-raised-button id="all-button" (click)="retrieveAssets()">All Assets</button>
+  <button mat-raised-button id="nopolicy-button" (click)="retrieveAssetsNoPolicy()">No Policy</button>
+  <button mat-raised-button id="newasset-button" (click)="newAsset()">New Asset</button>
+ </div>
+  <!--<button mat-raised-button id="unvuln-button" (click)="retrieveClosedTickets()">Closed Tickets</button>
+  <button mat-raised-button id="unvuln-button">My Group Work</button>
+  <button mat-raised-button id="newticket-button" (click)="createTicket()">New Ticket</button>--> 
+  <table class="table-hover" #dataTable mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+    <!-- COLUMN INFO -->
+     <!--ID Col -->
+      <ng-container matColumnDef="assetid">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by ID">ID</th>
+        <td mat-cell *matCellDef="let asset" (click)="openAsset(asset.assetid)"> {{asset.assetid}} </td>
+      </ng-container>
+      <!--Name Col -->
+      <ng-container matColumnDef="hostname">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Hostname">Hostname</th>
+        <td mat-cell *matCellDef="let asset" (click)="openAsset(asset.assetid)">{{asset.hostname}} </td>
+      </ng-container>
+      <ng-container matColumnDef="cpe">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by CPE">OS CPE</th>
+        <td mat-cell *matCellDef="let asset"(click)="openAsset(asset.assetid)">{{asset.cpe}} </td>
+      </ng-container>
+      <ng-container matColumnDef="risk">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Risk">Risk</th>
+        <td mat-cell *matCellDef="let asset"(click)="openAsset(asset.assetid)">{{asset.risk}} </td>
+      </ng-container>
+      <ng-container matColumnDef="baseSLA">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by SLA Time">SLA</th>
+        <td mat-cell *matCellDef="let asset"(click)="openAsset(asset.assetid)">{{calcHours(asset.baseSLA)}} Hours - {{calcMins(asset.baseSLA)}} Minutes</td>
+      </ng-container>
+      <ng-container matColumnDef="policyid">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Policy">Policy ID</th>
+        <td mat-cell *matCellDef="let asset"(click)="openAsset(asset.assetid)">{{asset.policyid}} </td>
+      </ng-container>
+      <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Category">Category</th>
+        <td mat-cell *matCellDef="let asset"(click)="openAsset(asset.assetid)">{{asset.category}} </td>
+      </ng-container>
+    <!-- ROW Info-->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let rowData; columns: displayedColumns;"></tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                   showFirstLastButtons 
+                   aria-label="Select page">
+    </mat-paginator></div>
+  <!--<button mat-raised-button id="myticket-button" (click)="retrieveMyTickets()">Go back</button>-->
+  </div>
+</body>
+</html>

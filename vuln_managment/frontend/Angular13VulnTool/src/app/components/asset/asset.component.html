@@ -1,0 +1,181 @@
+<div *ngIf="viewMode; else editable">
+    <div *ngIf="currentAsset.assetid">
+      <h4>Asset</h4>
+      <div>
+        <label><strong>ID:</strong></label> {{ currentAsset.assetid }}
+      </div>
+      <div>
+        <label><strong>CPE:</strong></label>
+        {{ currentAsset.cpe }}
+      </div>
+  
+      <a
+        class="badge badge-warning"
+        routerLink="/assets/{{ currentAsset.assetid }}"
+      >
+        Edit
+      </a>
+    </div>
+  
+    <div *ngIf="!currentAsset">
+      <br />
+      <p>Please click on a Asset...</p>
+    </div>
+  </div>
+  
+  <ng-template #editable>
+    <div *ngIf="currentAsset.assetid" class="edit-form">
+      <h4>Asset</h4>
+        <div class="row">
+          <div class="col-md-8">
+        <div class="form-group">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label for="id">ID</mat-label>
+          <label for="id">ID</label>
+          <input matInput
+            type="text"
+            class="form-control"
+            id="id"
+            [(ngModel)]="currentAsset.assetid"
+            name="id"
+            disabled
+          ></mat-form-field>
+        </div>
+        <div class="row">
+          <div class="col-md-8">
+        <div class="form-group">
+          <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label for="cpe">OS CPE</mat-label>
+          <input matInput
+            type="text"
+            class="form-control"
+            id="cpe"
+            [(ngModel)]="currentAsset.cpe"
+            name="cpe"
+          ></mat-form-field>
+        </div></div></div>
+        <div class="row">
+          <div class="col-md-8">
+            <div class="form-group"><mat-form-field appearance="fill">
+              <mat-label>Risk</mat-label>
+              <mat-select [value]="currentAsset.risk"[(ngModel)]="currentAsset.risk" name="risk" placeholder="Select an option">        
+                <mat-option *ngFor="let risks of risk" [value]= "risks.value"> {{ risks.viewValue }} </mat-option>
+            </mat-select></mat-form-field>
+          </div></div></div>
+          <div class = "row">
+            <div class = "col-md-4">
+          <div class="form-group">
+            <mat-form-field appearance="fill">
+              <mat-label for="slahours">SLA Hours</mat-label>
+            <input matInput
+              type="number" 
+              step="1" 
+              min="0"
+              class="form-control"
+              id="slahours"
+              [(ngModel)]="hours"
+              name="slahours"
+            ></mat-form-field>
+          </div></div>
+          <div class = "col-md-4">
+          <div class="form-group">
+            <mat-form-field appearance="fill">
+              <mat-label for="slamins">SLA Minutes</mat-label>
+            <input matInput
+              type="number" 
+              step="1" 
+              max="59"
+              min="0"
+              class="form-control"
+              id="slamins"
+              [(ngModel)]="minutes"
+              name="slamins"
+            ></mat-form-field>
+          </div></div></div>
+          <div class="row">
+            <div class="col-md-8">
+          <div class="form-group">
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label for="host">Hostname</mat-label>
+            <input matInput
+              type="text"
+              class="form-control"
+              id="host"
+              [(ngModel)]="currentAsset.hostname"
+              name="host"
+            ></mat-form-field>
+            </div></div></div>
+            <div class="row">
+              <div class="col-md-8">
+          <div class="form-group">
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label for="cpe">Category</mat-label>
+            <input matInput
+              type="text"
+              class="form-control"
+              id="category"
+              [(ngModel)]="currentAsset.category"
+              name="category"
+            ></mat-form-field>
+          </div></div></div></div>
+        <div class="col-md-4">
+      <mat-accordion>
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header (click)="viewTags()" >
+            <mat-panel-title>
+              CPE URIs
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div *ngFor="let Tag of taglist;">
+            {{ Tag }}
+          <button mat-icon-button aria-label="deleteTag"(click)="removeTag(Tag)">
+            <mat-icon>delete</mat-icon>
+          </button></div>
+          <div class="form-group">
+            <label for="addtag">Add Vendor</label>
+            <input
+              type="text"
+              class="form-control"
+              id="addven"
+              [(ngModel)]="vendor"
+              name="addven"
+            />
+          </div>
+          <div class="form-group">
+            <label for="addtag">Add Product</label>
+            <input
+              type="text"
+              class="form-control"
+              id="addprod"
+              [(ngModel)]="tech"
+              name="addprod"
+            />
+          </div>
+          <button mat-raised-button
+        type="submit"
+        (click)="addTag(vendor, tech)"
+      >
+      Add Tag
+      </button>
+        </mat-expansion-panel>
+      </mat-accordion></div></div>
+      
+       <button mat-raised-button
+        type="submit"
+        (click)="updateAsset()"
+      >
+      Save
+      </button>
+      <button mat-raised-button
+      type="submit"
+      (click)="closeAsset()"
+    >
+    Close
+    </button></div></ng-template>
+      <p>{{ message }}</p>
+  
+    <div *ngIf="!currentAsset.assetid">
+      <br />
+      <p>Cannot access this Ticket...</p>
+    </div>
+

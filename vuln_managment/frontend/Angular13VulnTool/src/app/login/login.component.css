@@ -1,0 +1,28 @@
+.mat-form-field{ 
+    width:100% !important;
+    font-size:15px !important;
+    align-self: center;
+  }
+  .matInput{
+     width:100% !important;
+    font-size:15px !important; 
+  }
+  .mat-form-field-flex {
+    padding-top: 3px;
+  }
+
+  .card{
+    background-color: rgb(41, 41, 41);
+  }
+button{
+    width:100% !important;
+    background-color: #c2185b;
+}
+
+.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+  }
