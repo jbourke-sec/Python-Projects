@@ -7,7 +7,7 @@ from together import Together
 app = Flask(__name__,template_folder='template')
 
 # Initialize Together API
-client = Together(api_key="11cd65db83bca3bfd7fb13ea05de040b6992eb17e9d39c34915ac45d3e3d1085")
+client = Together(api_key="API_KEY")
 
 # Initialize Long Sequence Summarizer
 model_name = "facebook/bart-large-cnn"
