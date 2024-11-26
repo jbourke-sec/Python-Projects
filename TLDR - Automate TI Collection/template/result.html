@@ -1,0 +1,30 @@
+templates/result.html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Threat Intelligence</title>
+</head>
+<body>
+    <h1>Threat Intelligence</h1>
+    <h2>Summary:</h2>
+    <p>{{ summary }}</p>
+    <h2>TTPs:</h2>
+    <ul>
+    {% for ttp in ttps %}
+        <li>{{ ttp.tactic }}: {{ ttp.technique }}</li>
+    {% endfor %}
+    </ul>
+    <h2>Detections:</h2>
+    <ul>
+    {% for detection in detections %}
+        <li>{{ detection.tactic }}: {{ detection.technique }}
+            <ul>
+            {% for rule in detection.detection_rules %}
+                <li>{{ rule }}</li>
+            {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
